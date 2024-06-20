@@ -1,0 +1,36 @@
+name: Terraform PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -no-color
+
+      # - name: Install truffleHog
+      #   run: pip install truffleHog
+
+      # - name: Scan for Secrets with truffleHog
+      #   run: trufflehog filesystem --path .
+
+      - name: Secret Scan with GitHub
+        uses: actions/secret-scan-action@v1
