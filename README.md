@@ -1,5 +1,5 @@
 # tf-pipeline
-terraform pipeline.
+Collection of terraform pipelines.
 
 ## Notes
 - AWS Credentials: Make sure to store your AWS credentials securely in GitHub Secrets.
